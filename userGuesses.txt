@@ -1,0 +1,18 @@
+  public void printUserGuesses(Scanner keyboard) {
+    int displayNumber = numberOfGuesses; //This number will be the one that is displayed instead of numberOfGuesses to show how many the user has left.
+    while (userGuesses.size() <= numberOfGuesses) {
+      userGuesses.add(keyboard.next());
+      String[] tempArray = userGuesses.toArray(new String[0]);
+      System.out.println("You have guessed: " + Arrays.toString(tempArray).replace("[", "").replace(",", "").replace("]", ""));
+      displayNumber--;
+      if (displayNumber > 1) {
+        System.out.println("You have: " + displayNumber + " guesses left, use them wisely.");
+      }
+      else if (displayNumber == 1) {
+        System.out.println("You have: " + displayNumber + " guess left, don't mess it up!");
+      }
+      else if (displayNumber == 0) {
+        System.out.println("You have: 0 guesses left. Game over, man. Game over!");
+      }
+    }
+  }
