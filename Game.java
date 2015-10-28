@@ -28,20 +28,19 @@ class Game {
   }
   
   //Modifies the "dashes" as the user gets a correct input. 
-  
-  public boolean modifyDashes(ArrayList<String> mostOptions, String userGuesses2) {
-    String temp = "";
-    for (int i = 0; i < mostOptions.size(); i++) {
-      temp = mostOptions.get(i);
-      for (int j = 0; j < dashes.length; j++) {
-        if (temp.substring(j, j + 1).equals(userGuesses2)) {
-          dashes[j] = userGuesses2;
-          return true;
-        }
-      }
-    }
-    return false;
-  }
+//  public boolean modifyDashes(ArrayList<String> mostOptions, String userGuesses2) {
+//    String temp = "";
+//    for (int i = 0; i < mostOptions.size(); i++) {
+//      temp = mostOptions.get(i);
+//      for (int j = 0; j < dashes.length; j++) {
+//        if (temp.substring(j, j + 1).equals(userGuesses2)) {
+//          dashes[j] = userGuesses2;
+//          return true;
+//        }
+//      }
+//    }
+//    return false;
+//  }
   
   //Getters
   public int getNumberOfGuesses() {

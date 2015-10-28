@@ -6,8 +6,8 @@ class Dictionary {
   private ArrayList<String> userLengthListOfWords;
   private String dashes;
   private int userWordLength;
-  private ArrayList<String> reducerList = new ArrayList<String>(); //listOfWordsContainingUserGuess
   private ArrayList<ArrayList<String>> listOfLists = new ArrayList<ArrayList<String>>();
+  private ArrayList<String> mostOptions = new ArrayList<String>();
   
   //Constructer that parses in an int which is the length of the word the user would like.
   public Dictionary(int userLength) throws FileNotFoundException {
@@ -35,39 +35,38 @@ class Dictionary {
     this.userWordLength = userLength;
   }
   
-  //Puts all of the words in userLengthListOfWords that contain userGuesses2 into another list. 
-  public void sortListsWithLetter(int userWordLength, String userGuesses2) {
-    for (int i = 0; i < userLengthListOfWords.size(); i++) {
-      String temp = this.userLengthListOfWords.get(i);
-      
-      if (temp.contains(userGuesses2))
-        this.reducerList.add(temp);
-    }
-  }
-  
-  //Categorise a list of lists, based on what position the letter is in a string. 
-  public void categoriseLists(int userWordLength, String userGuesses2) {
+  //Categorise a list of lists, based on what position the letter is in a string. Then returns the largest list. 
+  public void biggestList(int userWordLength, String tempGuess) {
     for (int i = 0; i < userWordLength; i++) {
       listOfLists.add(new ArrayList<String>());
       for (String word:userLengthListOfWords) {
-        if (userGuesses2.equals(word.substring(i, i + 1))) {
+        if (tempGuess.equals(word.substring(i, i + 1))) {
           listOfLists.get(i).add(word);
-        }
-      }
-    }
-  }
-  
-  //Find out which list in listOfLists is bigger.
-  public ArrayList<String> biggestList() {
+        }}}
+    
     ArrayList<String> tempList = new ArrayList<String>();
     for (int i = 1; i < listOfLists.size(); i++) {
       if (listOfLists.get(i).size() > listOfLists.get(i - 1).size())
         tempList = listOfLists.get(i);
     }
     
-    return tempList;
+    this.mostOptions = tempList;
   }
   
+  public void modifyMostOptions(String userGuesses2) {
+    String temp = "";
+    ArrayList<String> tempList = new ArrayList<String>();
+    for (int i = 0; i < mostOptions.size(); i++) {
+      temp = mostOptions.get(i);
+      for (int j = 0; j < temp.length(); i++) {
+        if (temp.substring(j, j + 1).equals(userGuesses2)) {
+          tempList.add(temp);
+        }
+      }
+    }
+    
+    this.mostOptions = tempList;
+  }
   
   //Getters (returns the sizes of local variable lists)
   public int getWordsSize() {
@@ -76,14 +75,14 @@ class Dictionary {
   public int getUserLengthListOfWordsSize() {
     return this.userLengthListOfWords.size();
   }
-  public int getReducerListSize() {
-    return this.reducerList.size();
-  }
   public int getListOfListsSize() {
     return this.listOfLists.size();
   }
-  public ArrayList<String> getReducerList() {
-    return reducerList;
+  public int getMostOptionsSize() {
+    return this.mostOptions.size();
+  }
+  public ArrayList<String> getMostOptions() {
+    return this.mostOptions;
   }
   public ArrayList<String> getWords() {
     return this.words;

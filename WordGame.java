@@ -19,30 +19,28 @@ public class WordGame {
     System.out.println(gme.getDashes().replace("[", "").replace(",", "").replace("]", ""));
     System.out.println("Good luck! Please make your first guess.");
     
-    String userGuesses = ""; //What the user actually guesses.
-    String userGuesses2 = ""; //This will be the LAST LETTER the user guessed.
+    String userGuesses = "";
+    String userGuesses2 = "";
+    String tempGuess = "";
+    
+    userGuesses = gme.buildUserGuesses(keyboard); //What the user actually guesses.
+    tempGuess = userGuesses.substring(1, 2); //A String that is only used once to build biggestList.
+    System.out.println("You have guessed: " + userGuesses);
+    
+    dict.biggestList(userWordLength, tempGuess);
+    System.out.println(dict.getMostOptions());
+    
     int count = 0;
-    ArrayList<String> mostOptions;
-    while (count < numberOfGuesses) {
+    while (count < numberOfGuesses - 1) {
       userGuesses = gme.buildUserGuesses(keyboard);
+      System.out.println("You have guessed: " + userGuesses); 
       count++;
-      System.out.println("You have guessed: " + userGuesses);
       
-      userGuesses2 = userGuesses.substring(userGuesses.length() - 1, userGuesses.length()); //Get the last Guess.
-      
-      dict.sortListsWithLetter(userWordLength, userGuesses2); //Reduce and sort a list of words that only contain the last guess.
-      
-      dict.categoriseLists(userWordLength, userGuesses2);//This makes a lists of lists, categorising each list by index of userGesses2
-      mostOptions = dict.biggestList();//Find the biggest list (most options) in the list of lists.
-      System.out.println(mostOptions);
-      if (gme.modifyDashes(mostOptions, userGuesses2))
-        System.out.println(gme.getDashes().replace("[", "").replace(",", "").replace("]", ""));
-      else
-        System.out.println("KJN");
-
+      userGuesses2 = userGuesses.substring(userGuesses.length() - 1, userGuesses.length()); //This will be the LAST LETTER the user guessed.
+      dict.modifyMostOptions(userGuesses2);
+      System.out.println(dict.getMostOptions());
     }
   }
-  
   
   //Method that makes sure the number is between 1 and 29 (the minimum and maximum length of a word).
   public static int validWordLength(Scanner keyboard) {
